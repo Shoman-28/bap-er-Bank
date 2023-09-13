@@ -8,7 +8,13 @@ document.getElementById('btn-withdraw').addEventListener('click', function () {
   const newWithdrawAmountString = withdrawFiled.value;
   const newWithdrawAmount = parseFloat(newWithdrawAmountString);
 
-  // console.log(newWithdrawAmount)
+  //step-7: clear the withdraw filed
+  withdrawFiled.value = '';
+
+  if (isNaN(newWithdrawAmount)) {
+    alert('Please Enter valid number')
+    return;
+  }
 
   // step-3: get the current Withdraw total.
   // for non-input(element other than input, textarea).
@@ -17,27 +23,27 @@ document.getElementById('btn-withdraw').addEventListener('click', function () {
   const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
 
 
-  // console.log(previousWithdrawTotal)
+  // step-5: get ballance current total.
+  const balanceTotalElement = document.getElementById('total-balance');
+  const previousBalanceTotalString = balanceTotalElement.innerText;
+  const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+
+
+
+  if (newWithdrawAmount > previousBalanceTotal) {
+    alert('Baap er Bank e eto Taka nai');
+    return;
+  }
 
   // step-4: add number to set the total withdraw.
   const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
 
   withdrawTotalElement.innerText = currentWithdrawTotal;
 
-  // step-5: get ballance current total.
-  const balanceTotalElement = document.getElementById('total-balance');
-  const previousBalanceTotalString = balanceTotalElement.innerText;
-  const previousBalanceTotal = parseFloat(previousBalanceTotalString);
-
-  if (newWithdrawAmount > previousBalanceTotal) {
-    alert("Baap er Bank e eto Taka nai");
-  }
   // step-6: calculate current total Balance.
   const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
 
   balanceTotalElement.innerText = newBalanceTotal;
-  console.log(newBalanceTotal);
 
-  //step-7: clear the withdraw filed
-  withdrawFiled.value = '';
+
 })
