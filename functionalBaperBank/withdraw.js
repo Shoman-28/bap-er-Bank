@@ -9,10 +9,18 @@
 */
 document.getElementById('btn-withdraw').addEventListener('click', function () {
   const newWithdrawAmount = getInputFiledValueById('withdraw-field');
+  if (isNaN(newWithdrawAmount)) {
+    alert("Please enter valid number")
+    return;
+  }
   const previousWithdrawTotal = getTextElementValueById('withdraw-total');
+  const previousBalanceTotal = getTextElementValueById('total-balance');
+  if (newWithdrawAmount > previousBalanceTotal) {
+    alert("Baap er Bank e eto Taka nai");
+    return;
+  }
   const newWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
   setTextElementValueById('withdraw-total', newWithdrawTotal);
-  const previousBalanceTotal = getTextElementValueById('total-balance');
   const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
   setTextElementValueById('total-balance', newBalanceTotal);
 

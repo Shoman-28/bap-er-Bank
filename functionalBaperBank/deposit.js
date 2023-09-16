@@ -10,6 +10,10 @@
 // 5. get previous balance by using the function
 document.getElementById('btn-deposit').addEventListener('click', function () {
   const newDepositAmount = getInputFiledValueById('deposit-field');
+  if (isNaN(newDepositAmount)) {
+    alert("Please enter valid number")
+    return;
+  }
   const previousDepositTotal = getTextElementValueById('deposit-total');
   const newDepositTotal = previousDepositTotal + newDepositAmount;
   setTextElementValueById('deposit-total', newDepositTotal);
